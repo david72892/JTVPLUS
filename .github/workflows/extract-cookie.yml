@@ -1,0 +1,39 @@
+name: Extract HDNEA Cookie
+
+on:
+  schedule:
+    # Run every 5 hours
+    - cron: '0 */5 * * *'
+  workflow_dispatch: # Allow manual trigger
+
+jobs:
+  extract-cookie:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+
+      - name: Extract Cookie
+        run: node extract-cookie.js
+
+      - name: Commit and push changes
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add cookie.txt
+          if git diff --staged --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "Update cookie.txt - $(date)"
+            git push
+          fi
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
