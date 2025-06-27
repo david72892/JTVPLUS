@@ -3,7 +3,7 @@ name: Extract HDNEA Cookie
 on:
   schedule:
     # Run every 5 hours
-    - cron: '0 */5 * * *'
+    - cron: '0 */1 * * *'
   workflow_dispatch: # Allow manual trigger
 
 jobs:
