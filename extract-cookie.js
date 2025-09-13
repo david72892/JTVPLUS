@@ -1,7 +1,7 @@
 const https = require('https');
 const fs = require('fs');
 
-const API_URL = 'https://raw.githubusercontent.com/alex4528/m3u/refs/heads/main/jstar.m3u';
+const API_URL = 'https://raw.githubusercontent.com/alex8875/m3u/refs/heads/main/jstar.m3u';
 
 function fetchM3U() {
   return new Promise((resolve, reject) => {
